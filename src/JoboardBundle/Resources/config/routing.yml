@@ -1,0 +1,12 @@
+JoboardBundle_job:
+    resource: "@JoboardBundle/Resources/config/routing/job.yml"
+    prefix: /job
+
+JoboardBundle_home:
+    path:     /
+    defaults: { _controller: "JoboardBundle:Job:index" }
+    methods:  GET
+
+JoboardBundle_category:
+    path: /category/{slug}/{page}
+    defaults: { _controller: "JoboardBundle:Category:show", page: 1 }

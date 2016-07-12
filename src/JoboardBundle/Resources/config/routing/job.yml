@@ -1,0 +1,23 @@
+job_index:
+    path:     /
+    defaults: { _controller: "JoboardBundle:Job:index" }
+    methods:  GET
+
+job_show:
+    path:  /{company}/{location}/{id}/{position}/
+    defaults: { _controller: "JoboardBundle:Job:show" }
+
+job_new:
+    path:     /new
+    defaults: { _controller: "JoboardBundle:Job:new" }
+    methods:  [GET, POST]
+
+job_edit:
+    path:     /{id}/edit
+    defaults: { _controller: "JoboardBundle:Job:edit" }
+    methods:  [GET, POST]
+
+job_delete:
+    path:     /{id}/delete
+    defaults: { _controller: "JoboardBundle:Job:delete" }
+    methods:  DELETE

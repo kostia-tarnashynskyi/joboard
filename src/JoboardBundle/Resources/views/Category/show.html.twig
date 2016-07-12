@@ -1,0 +1,56 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}
+    Вакансии в категории {{ category.name }}
+{% endblock %}
+
+{% block stylesheets %}
+    {{ parent() }}
+    <link rel="stylesheet" href="{{ asset('bundles/joboard/css/jobs.css') }}" type="text/css" media="all" />
+{% endblock %}
+
+{% block content %}
+    <div class="category">
+        <div class="feed">
+            <a href="">Feed</a>
+        </div>
+        <h1>{{ category.name }}</h1>
+    </div>
+
+    {{ include ('JoboardBundle:Job:list.html.twig', {'jobs': category.activejobs}) }}
+
+    {% if lastPage > 1 %}
+        <div class="pagination">
+            <a href="{{ path('JoboardBundle_category', {'slug': category.slug, 'page': 1}) }}">
+                В начало
+            </a>
+
+            <a href="{{ path('JoboardBundle_category', {'slug': category.slug, 'page': previousPage }) }}">
+                &lt;&lt;
+            </a>
+
+            {% for page in 1..lastPage %}
+                {% if page == currentPage %}
+                    {{ page }}
+                {% else %}
+                    <a href="{{ path('JoboardBundle_category', {'slug': category.slug, 'page': page}) }}">{{ page }}</a>
+                {% endif %}
+            {% endfor %}
+
+            <a href="{{ path('JoboardBundle_category', {'slug': category.slug, 'page': nextPage}) }}">
+                &gt;&gt;
+            </a>
+
+            <a href="{{ path('JoboardBundle_category', {'slug': category.slug, 'page': lastPage}) }}">
+                В конец
+            </a>
+        </div>
+    {% endif %}
+
+    <div class="pagination_desc">
+        <strong>{{ totalJobs }}</strong> вакансии в категории
+        {% if lastPage > 1 %}
+            - страница <strong>{{ currentPage }}/{{ lastPage }}</strong>
+        {% endif %}
+    </div>
+{% endblock %}
